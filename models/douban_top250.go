@@ -1,7 +1,6 @@
 package models
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -18,9 +17,8 @@ type DoubanTop250 struct {
 	DeletedAt *time.Time `sql:"index"`
 }
 
-func Test() {
-	//db.AutoMigrate(&DoubanTop250{})
-	fmt.Println("Test", db)
+func (d *DoubanTop250) Migrate() {
+	db.AutoMigrate(&DoubanTop250{})
 }
 
 func CreateDoubanTop250(d *DoubanTop250) error {
