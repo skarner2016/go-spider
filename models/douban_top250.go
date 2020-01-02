@@ -1,14 +1,16 @@
 package models
 
 import (
+	"fmt"
 	"time"
 )
 
 type DoubanTop250 struct {
-	ID        uint   `gorm:"primary_key"`
+	ID        uint   `gorm:"primary_key auto_increment"`
+	Sort      int    `gorm:"index:sort"`
 	Name      string `gorm:"index:name"`
 	Star      string
-	Number    string
+	Number    int
 	Desc      string
 	Url       string
 	CreatedAt time.Time
@@ -18,7 +20,7 @@ type DoubanTop250 struct {
 
 func Test() {
 	//db.AutoMigrate(&DoubanTop250{})
-	//fmt.Println("Test", db)
+	fmt.Println("Test", db)
 }
 
 func CreateDoubanTop250(d *DoubanTop250) error {
