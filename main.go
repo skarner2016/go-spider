@@ -1,9 +1,10 @@
 package main
 
 import (
-	"go-spider/douban"
+	"go-spider/lagou"
 )
 
 func main() {
-	douban.StartTop250()
+	//douban.StartTop250()
+	lagou.Start()
 }

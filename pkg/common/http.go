@@ -1,7 +1,11 @@
 package common
 
 import (
+	"errors"
 	"net/http"
+	"strconv"
+
+	"github.com/PuerkitoBio/goquery"
 )
 
 var defaultHeader = map[string]string{
@@ -30,4 +34,16 @@ func SendRequest(header map[string]string, url string) (*http.Response, error) {
 	client := &http.Client{}
 
 	return client.Do(request)
+}
+
+func GetDoc(header map[string]string, url string) (*goquery.Document, error) {
+	response, err := SendRequest(header, url)
+	if err != nil {
+		return nil, err
+	}
+	if response.StatusCode != http.StatusOK {
+		return nil, errors.New("status code: " + strconv.Itoa(response.StatusCode))
+	}
+
+	return goquery.NewDocumentFromReader(response.Body)
 }
